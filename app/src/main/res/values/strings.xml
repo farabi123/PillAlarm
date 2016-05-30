@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Pill Alarm</string>
+    <string name="action_settings">Settings</string>
+    <string name="choice1">Tylenol</string>
+    <string name="choice2">Advil</string>
+    <string name="choice3">Hestamid-F</string>
+    <string name="choice4">Panadol</string>
+    <string name="title_activity_alarm">Alarm</string>
+
+</resources>
