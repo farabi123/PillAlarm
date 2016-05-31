@@ -46,7 +46,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Alarm is:"
         android:id="@+id/updateAlarmStatus"
-        android:layout_below="@+id/timePicker"
+        android:layout_below="@+id/alarmOff"
         android:layout_centerHorizontal="true" />
 
 

@@ -20,8 +20,8 @@ public class Alarm extends AppCompatActivity {
     AlarmManager alarmManager;
     TimePicker alarmTimePicker;
     TextView updateText;
-    TextView pillName;
     Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +44,6 @@ public class Alarm extends AppCompatActivity {
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmTimePicker = (TimePicker) findViewById(R.id.timePicker);
         updateText = (TextView) findViewById(R.id.updateAlarmStatus);
-       // pillName = (TextView) findViewById(R.id.pillText);
 
         //Create an instance of the Calendar
         final Calendar calendar = Calendar.getInstance();
@@ -54,10 +53,10 @@ public class Alarm extends AppCompatActivity {
 
         //Create an onclick listener to start the alarm
         alarmOn.setOnClickListener( new View.OnClickListener(){
-            @TargetApi(Build.VERSION_CODES.M)
+            //@TargetApi(Build.VERSION_CODES.M)
             @Override
             public void onClick(View v){
-                System.out.println("DOES NOT RASH YET");
+
                 calendar.set(Calendar.HOUR_OF_DAY,alarmTimePicker.getHour());
                 calendar.set(Calendar.MINUTE,alarmTimePicker.getMinute());
 
@@ -76,7 +75,7 @@ public class Alarm extends AppCompatActivity {
                 if(min < 10){
                     minString = "0" + String.valueOf(min);
                 }
-                set_alarm_text("Time is set to"+ hourString + ":" + minString);
+                set_alarm_text("Time is set to "+ hourString + ":" + minString);
 
                 //set_alarm_text("Alarm ON!");
 
