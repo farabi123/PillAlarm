@@ -100,6 +100,7 @@ public class Alarm extends AppCompatActivity {
                 set_alarm_text("Alarm OFF!");
                 //cancel the waiting intent
                 alarmManager.cancel(waitingIntent);
+                sendBroadcast(alarmIntent);
             }
         });
     }
