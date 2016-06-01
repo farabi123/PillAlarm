@@ -2,7 +2,9 @@ package com.example.admin.pillalarm;
 
 import android.annotation.TargetApi;
 import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -21,6 +23,8 @@ public class Alarm extends AppCompatActivity {
     TimePicker alarmTimePicker;
     TextView updateText;
     Context context;
+    static Intent alarmIntent;
+    PendingIntent waitingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,9 @@ public class Alarm extends AppCompatActivity {
         //Create an instance of the Calendar
         final Calendar calendar = Calendar.getInstance();
 
+        //Make an intent for the AlarmReceiver class
+        alarmIntent = new Intent(this.context,AlarmReceiver.class);;
+
         //Initialize the on button
         Button alarmOn=(Button) findViewById(R.id.alarmOn);
 
@@ -60,7 +67,6 @@ public class Alarm extends AppCompatActivity {
                 calendar.set(Calendar.HOUR_OF_DAY,alarmTimePicker.getHour());
                 calendar.set(Calendar.MINUTE,alarmTimePicker.getMinute());
 
-                System.out.println("HELLOOOOOOOOO");
                 int hour = alarmTimePicker.getHour();
                 int min= alarmTimePicker.getMinute();
                 System.out.println("hour is:"+hour);
@@ -76,8 +82,11 @@ public class Alarm extends AppCompatActivity {
                     minString = "0" + String.valueOf(min);
                 }
                 set_alarm_text("Time is set to "+ hourString + ":" + minString);
-
-                //set_alarm_text("Alarm ON!");
+                //Set_alarm_text("Alarm ON!");
+                waitingIntent = PendingIntent.getBroadcast(Alarm.this,
+                        0,alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                //Set the alarm Manager
+                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),waitingIntent);
 
             }
         });
@@ -89,6 +98,8 @@ public class Alarm extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 set_alarm_text("Alarm OFF!");
+                //cancel the waiting intent
+                alarmManager.cancel(waitingIntent);
             }
         });
     }

@@ -27,6 +27,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.admin.pillalarm.MainActivity" />
         </activity>
+        <receiver android:name="AlarmReceiver"/>
+        <service android:name=".RingtoneService"
+        android:enabled="true">
+    </service>
     </application>
 
 </manifest>
