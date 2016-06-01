@@ -23,7 +23,7 @@ public class Alarm extends AppCompatActivity {
     TimePicker alarmTimePicker;
     TextView updateText;
     Context context;
-    static Intent alarmIntent;
+    //static Intent alarmIntent;
     PendingIntent waitingIntent;
 
     @Override
@@ -53,7 +53,7 @@ public class Alarm extends AppCompatActivity {
         final Calendar calendar = Calendar.getInstance();
 
         //Make an intent for the AlarmReceiver class
-        alarmIntent = new Intent(this.context,AlarmReceiver.class);;
+        final Intent alarmIntent = new Intent(this.context,AlarmReceiver.class);;
 
         //Initialize the on button
         Button alarmOn=(Button) findViewById(R.id.alarmOn);
@@ -82,6 +82,10 @@ public class Alarm extends AppCompatActivity {
                     minString = "0" + String.valueOf(min);
                 }
                 set_alarm_text("Time is set to "+ hourString + ":" + minString);
+
+                // Indicates when on button is clicked fro the clock
+                alarmIntent.putExtra("extra","ON");
+
                 //Set_alarm_text("Alarm ON!");
                 waitingIntent = PendingIntent.getBroadcast(Alarm.this,
                         0,alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -100,6 +104,8 @@ public class Alarm extends AppCompatActivity {
                 set_alarm_text("Alarm OFF!");
                 //cancel the waiting intent
                 alarmManager.cancel(waitingIntent);
+                // Indicates when off button is clicked fro the clock
+                alarmIntent.putExtra("extra","OFF");
                 sendBroadcast(alarmIntent);
             }
         });

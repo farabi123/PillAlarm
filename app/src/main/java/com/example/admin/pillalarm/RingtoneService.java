@@ -13,16 +13,55 @@ import android.widget.Toast;
 public class RingtoneService extends Service {
 
     MediaPlayer song;
+    boolean isPlaying;
+    int startId;
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
     @Override
-    public int onStartCommand(Intent intent, int flags, int StartId){
+    public int onStartCommand(Intent intent, int flags, int StartId) {
         System.out.println("inside onstart command");
-        song = MediaPlayer.create(this, R.raw.ringtone);
-        song.start();
+
+        String status = intent.getExtras().getString("extra");
+        System.out.println("Status = "+ status);
+        if (status != null) {
+            switch (status) {
+                case "ON":
+                    System.out.println("ON CASE");
+                    startId = 1;
+                    break;
+                case "Off":
+                    System.out.println("OFF CASE");
+                    startId = 0;
+                    break;
+                default:
+                    System.out.println("DEFAULT CASE");
+                    startId = 0;
+                    break;
+            }
+        }
+
+        if (!this.isPlaying && startId == 1){
+            song = MediaPlayer.create(this, R.raw.ringtone);
+            song.start();
+            this.isPlaying=true;
+            this.startId= 0;
+        }
+        else if(this.isPlaying && startId == 0) {
+            song.stop();
+            song.reset();
+            this.isPlaying=false;
+            this.startId= 0;
+        }
+        else{
+            System.out.println("Code shouldn't enter this. WHY ARE YOU HERE?");
+            System.out.println("id="+ this.startId);
+            System.out.println("music playing="+ this.isPlaying);
+        }
+
         return START_NOT_STICKY;
     }
     @Override
