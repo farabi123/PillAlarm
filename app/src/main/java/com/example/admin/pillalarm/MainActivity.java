@@ -32,12 +32,12 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
         });
 
     ListView viewOfPills = (ListView) findViewById(R.id.listview);
-    ArrayAdapter<String> adapter_of_titles = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+    ArrayAdapter<String> adapterOfTitles = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
 
     for(PillsList enumOfPills :PillsList.values()) {
-        adapter_of_titles.add(getString(enumOfPills.title));
+        adapterOfTitles.add(getString(enumOfPills.title));
     }
-    viewOfPills.setAdapter(adapter_of_titles);
+    viewOfPills.setAdapter(adapterOfTitles);
     viewOfPills.setOnItemClickListener(this);
     }
 

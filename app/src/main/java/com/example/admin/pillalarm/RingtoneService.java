@@ -1,10 +1,16 @@
 package com.example.admin.pillalarm;
 
+import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 /**
@@ -21,6 +27,7 @@ public class RingtoneService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
+    //@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public int onStartCommand(Intent intent, int flags, int StartId) {
         System.out.println("inside onstart command");
@@ -49,7 +56,23 @@ public class RingtoneService extends Service {
             song.start();
             this.isPlaying=true;
             this.startId= 0;
+            //Make a notification when the alarm is ringing
+            NotificationManager notifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            Intent intentInAlarm = new Intent (this.getApplicationContext(), Alarm.class);
+            PendingIntent pendingIntentInAlarm = PendingIntent.getActivity(this, 0,intentInAlarm,0 );
+
+            Notification popupNotification = new NotificationCompat.Builder(this)
+                    .setContentTitle ("TAKE YOUR PILLS!!!")
+                    .setContentText("CLICK HERE TO SHUT ME UP")
+                    .setContentIntent(pendingIntentInAlarm)
+                    .setSmallIcon(R.drawable.bell)
+                    .setAutoCancel(true)
+                    .build();
+
+            // Start notification
+            notifyManager.notify(0, popupNotification);
         }
+
         else if(this.isPlaying && startId == 0) {
             song.stop();
             song.reset();
@@ -66,6 +89,7 @@ public class RingtoneService extends Service {
     }
     @Override
     public void onDestroy(){
-        Toast.makeText(this,"inside onDestroy", Toast.LENGTH_SHORT).show();
+
+        //Toast.makeText(this,"inside onDestroy", Toast.LENGTH_SHORT).show();
     }
 }
