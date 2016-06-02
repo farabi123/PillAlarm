@@ -6,5 +6,6 @@
     <string name="choice3">Hestamid-F</string>
     <string name="choice4">Panadol</string>
     <string name="title_activity_alarm">Alarm</string>
+    <string name="title_activity_input_pills">InputPills</string>
 
 </resources>

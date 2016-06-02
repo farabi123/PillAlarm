@@ -15,11 +15,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public class MainActivity extends AppCompatActivity  implements AdapterView.OnItemClickListener{
+public class MainActivity extends AppCompatActivity{
+    int i=0;
     EditText pillName1;
     EditText pillName2;
+    EditText pillName3;
+    EditText pillName4;
+    EditText pillName5;
+    EditText pillName6;
+    EditText pillName7;
+    EditText pillName8;
+    EditText pillName9;
+    EditText pillName10;
     String[] pillArray;
-    int i=0;
+    static ArrayAdapter<String> adapterOfTitles;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,13 +45,22 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
             }
         });
 
-//Trying the strings
-
+        //Initialize the EditTexts
         pillName1 = (EditText) findViewById(R.id.editText1);
         pillName2 = (EditText) findViewById(R.id.editText2);
-        pillArray = new String[2];
-        ListView viewOfPills = (ListView) findViewById(R.id.listview);
-        final ArrayAdapter<String> adapterOfTitles = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+        pillName3 = (EditText) findViewById(R.id.editText3);
+        pillName4 = (EditText) findViewById(R.id.editText4);
+        pillName5 = (EditText) findViewById(R.id.editText5);
+        pillName6 = (EditText) findViewById(R.id.editText6);
+        pillName7 = (EditText) findViewById(R.id.editText7);
+        pillName8 = (EditText) findViewById(R.id.editText8);
+        pillName9 = (EditText) findViewById(R.id.editText9);
+        pillName10 = (EditText) findViewById(R.id.editText10);
+
+        //Initialize the String array
+        pillArray = new String[10];
+        //Initialize the adapter
+        adapterOfTitles = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         //Initialize the off button
         Button GO=(Button) findViewById(R.id.button);
 
@@ -51,31 +69,44 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
             @Override
             public void onClick(View v) {
                 set_pill();
-
-                for(i=0;i<2;i++){
+                for(i=0;i<10;i++){
                     adapterOfTitles.add(pillArray[i]);
                     System.out.println("COUNT IS:" +adapterOfTitles.getCount());
                 }
+                Intent pillIntent= new Intent(MainActivity.this,InputPills.class);
+                startActivity(pillIntent);
 
             }
         });
-
-       /* for(PillsList enumOfPills :PillsList.values()) {
-        adapterOfTitles.add(getString(enumOfPills.title));
-    }*/
-       viewOfPills.setAdapter(adapterOfTitles);
-        viewOfPills.setOnItemClickListener(this);
     }
     private void set_pill() {
         pillArray[0]=pillName1.getText().toString();
         pillArray[1]=pillName2.getText().toString();
+        pillArray[2]=pillName3.getText().toString();
+        pillArray[3]=pillName4.getText().toString();
+        pillArray[4]=pillName5.getText().toString();
+        pillArray[5]=pillName6.getText().toString();
+        pillArray[6]=pillName7.getText().toString();
+        pillArray[7]=pillName8.getText().toString();
+        pillArray[8]=pillName9.getText().toString();
+        pillArray[9]=pillName10.getText().toString();
+
         System.out.println("The first PILL IS: "+pillArray[0]);
         System.out.println("The second PILL IS: "+pillArray[1]);
+        System.out.println("The third PILL IS: "+pillArray[2]);
+        System.out.println("The fourth PILL IS: "+pillArray[3]);
+        System.out.println("The fifth PILL IS: "+pillArray[4]);
+        System.out.println("The sixth PILL IS: "+pillArray[5]);
+        System.out.println("The seventh PILL IS: "+pillArray[6]);
+        System.out.println("The eighth PILL IS: "+pillArray[7]);
+        System.out.println("The ninth PILL IS: "+pillArray[8]);
+        System.out.println("The tenth PILL IS: "+pillArray[9]);
     }
 
-
-
-
+    public static ArrayAdapter<String> getTheAdapter () {
+        System.out.println("COUNT INSIDE METHOD:" +adapterOfTitles.getCount());
+        return adapterOfTitles;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -90,48 +121,12 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
-        Intent alarmIntent= new Intent(MainActivity.this,Alarm.class);
-        startActivity(alarmIntent);
-        // PillsList listPill= PillsList.values()[position];
-     //   String chosenPill=pillArray[position];
-        //System.out.println("pill:"+listPill);
-        //switch(listPill) {
-        /*switch(chosenPill){
-            case Choice1:
-            case pillArray[0]:
-                System.out.println("1");
-                Intent alarmIntent1= new Intent(MainActivity.this,Alarm.class);
-                startActivity(alarmIntent1);
-                break;
 
-            case Choice2:
-                System.out.println("2");
-                Intent alarmIntent2= new Intent(MainActivity.this,Alarm.class);
-                startActivity(alarmIntent2);
-                break;
-
-            case Choice3:
-                System.out.println("3");
-                Intent alarmIntent3= new Intent(MainActivity.this,Alarm.class);
-                startActivity(alarmIntent3);
-                break;
-
-            case Choice4:
-                System.out.println("4");
-                Intent alarmIntent4= new Intent(MainActivity.this,Alarm.class);
-                startActivity(alarmIntent4);
-                break;
-        }*/
-    }
 }
