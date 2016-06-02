@@ -11,10 +11,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity  implements AdapterView.OnItemClickListener{
-
+    EditText pillName1;
+    EditText pillName2;
+    String[] pillArray;
+    int i=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,15 +36,46 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
             }
         });
 
-    ListView viewOfPills = (ListView) findViewById(R.id.listview);
-    ArrayAdapter<String> adapterOfTitles = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+//Trying the strings
 
-    for(PillsList enumOfPills :PillsList.values()) {
+        pillName1 = (EditText) findViewById(R.id.editText1);
+        pillName2 = (EditText) findViewById(R.id.editText2);
+        pillArray = new String[2];
+        ListView viewOfPills = (ListView) findViewById(R.id.listview);
+        final ArrayAdapter<String> adapterOfTitles = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+        //Initialize the off button
+        Button GO=(Button) findViewById(R.id.button);
+
+        //Create an on click listener to GO
+        GO.setOnClickListener( new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                set_pill();
+
+                for(i=0;i<2;i++){
+                    adapterOfTitles.add(pillArray[i]);
+                    System.out.println("COUNT IS:" +adapterOfTitles.getCount());
+                }
+
+            }
+        });
+
+       /* for(PillsList enumOfPills :PillsList.values()) {
         adapterOfTitles.add(getString(enumOfPills.title));
+    }*/
+       viewOfPills.setAdapter(adapterOfTitles);
+        viewOfPills.setOnItemClickListener(this);
     }
-    viewOfPills.setAdapter(adapterOfTitles);
-    viewOfPills.setOnItemClickListener(this);
+    private void set_pill() {
+        pillArray[0]=pillName1.getText().toString();
+        pillArray[1]=pillName2.getText().toString();
+        System.out.println("The first PILL IS: "+pillArray[0]);
+        System.out.println("The second PILL IS: "+pillArray[1]);
     }
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -65,10 +101,15 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
-        PillsList listPill= PillsList.values()[position];
-        System.out.println("pill:"+listPill);
-        switch(listPill) {
+        Intent alarmIntent= new Intent(MainActivity.this,Alarm.class);
+        startActivity(alarmIntent);
+        // PillsList listPill= PillsList.values()[position];
+     //   String chosenPill=pillArray[position];
+        //System.out.println("pill:"+listPill);
+        //switch(listPill) {
+        /*switch(chosenPill){
             case Choice1:
+            case pillArray[0]:
                 System.out.println("1");
                 Intent alarmIntent1= new Intent(MainActivity.this,Alarm.class);
                 startActivity(alarmIntent1);
@@ -91,6 +132,6 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
                 Intent alarmIntent4= new Intent(MainActivity.this,Alarm.class);
                 startActivity(alarmIntent4);
                 break;
-        }
+        }*/
     }
 }

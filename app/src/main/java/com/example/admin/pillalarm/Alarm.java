@@ -60,7 +60,6 @@ public class Alarm extends AppCompatActivity {
 
         //Create an onclick listener to start the alarm
         alarmOn.setOnClickListener( new View.OnClickListener(){
-            //@TargetApi(Build.VERSION_CODES.M)
             @Override
             public void onClick(View v){
 
