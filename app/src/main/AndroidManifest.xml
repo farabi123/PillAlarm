@@ -11,7 +11,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
+            android:label="MEDICALARM"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
         <activity
             android:name=".Alarm"
             android:label="@string/title_activity_alarm"
-            android:parentActivityName=".InputPills"
+            android:parentActivityName=".PillsList"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -37,8 +37,8 @@
             android:enabled="true" />
 
         <activity
-            android:name=".InputPills"
-            android:label="@string/title_activity_input_pills"
+            android:name=".PillsList"
+            android:label="List Of Pills"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

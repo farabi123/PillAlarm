@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -62,6 +61,18 @@ public class MainActivity extends AppCompatActivity{
         pillName9 = (EditText) findViewById(R.id.editText9);
         pillName10 = (EditText) findViewById(R.id.editText10);
 
+        final String empty= "";
+        pillName1.setText(empty);
+        pillName2.setText(empty);
+        pillName3.setText(empty);
+        pillName4.setText(empty);
+        pillName5.setText(empty);
+        pillName6.setText(empty);
+        pillName7.setText(empty);
+        pillName8.setText(empty);
+        pillName9.setText(empty);
+        pillName10.setText(empty);
+
         //Initialize the sharedpreference
         sharedPref = getSharedPreferences("Pills",Context.MODE_PRIVATE);
         //Initialize the String array
@@ -77,13 +88,16 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View v) {
                 set_pill();
                 //displayData();
-                for(i=0;i<10;i++){
-                   // if(pillArray[i]!=" ") {
+                for(i=0;i<10;i++) {
+                    if (pillArray[i].equals(empty)){
+                        System.out.println("THROW IT AWAY");
+                        continue;
+                    } else{
                         adapterOfTitles.add(pillArray[i]);
                         System.out.println("COUNT IS:" + adapterOfTitles.getCount());
-                    //}
+                    }
                 }
-                Intent pillIntent= new Intent(MainActivity.this,InputPills.class);
+                Intent pillIntent= new Intent(MainActivity.this,PillsList.class);
                 startActivity(pillIntent);
 
             }
@@ -125,6 +139,14 @@ public class MainActivity extends AppCompatActivity{
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("pill1",pillName1.getText().toString());
         editor.putString("pill2",pillName2.getText().toString());
+        editor.putString("pill3",pillName3.getText().toString());
+        editor.putString("pill4",pillName4.getText().toString());
+        editor.putString("pill5",pillName5.getText().toString());
+        editor.putString("pill6",pillName6.getText().toString());
+        editor.putString("pill7",pillName7.getText().toString());
+        editor.putString("pill8",pillName8.getText().toString());
+        editor.putString("pill9",pillName9.getText().toString());
+        editor.putString("pill10",pillName10.getText().toString());
         editor.apply();
 
         Toast.makeText(this, "Saved!", Toast.LENGTH_LONG).show();
@@ -156,24 +178,31 @@ public class MainActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
-   /* public void saveInfo(){
-        SharedPreferences pref = getSharedPreferences("Pills",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putString("pill1",pillName1.getText().toString());
-        editor.putString("pill2",pillName2.getText().toString());
-        editor.apply();
 
-        Toast.makeText(this, "Saved!", Toast.LENGTH_LONG).show();
-    }*/
-
-    //static
+    //Retrieve info on the screen in editTexts
     public void displayData(){
         String pill1 = sharedPref.getString("pill1","");
         String pill2 = sharedPref.getString("pill2","");
-        System.out.println("THE FIRST STRING IS:"+pill1);
-        System.out.println("THE SECOND STRING IS:"+pill2);
-        //save.setText(pill1+ "and"+pill2);
+        String pill3 = sharedPref.getString("pill3","");
+        String pill4 = sharedPref.getString("pill4","");
+        String pill5 = sharedPref.getString("pill5","");
+        String pill6 = sharedPref.getString("pill6","");
+        String pill7 = sharedPref.getString("pill7","");
+        String pill8 = sharedPref.getString("pill8","");
+        String pill9 = sharedPref.getString("pill9","");
+        String pill10 = sharedPref.getString("pill10","");
+
         pillName1.setText(pill1);
+        pillName2.setText(pill2);
+        pillName3.setText(pill3);
+        pillName4.setText(pill4);
+        pillName5.setText(pill5);
+        pillName6.setText(pill6);
+        pillName7.setText(pill7);
+        pillName8.setText(pill8);
+        pillName9.setText(pill9);
+        pillName10.setText(pill10);
+
     }
 
 }
