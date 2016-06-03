@@ -15,6 +15,7 @@ public void onReceive(Context context, Intent intent){
         String getTheString = intent.getExtras().getString("extra");
         System.out.println("The string is "+ getTheString);
 
+        //Make an intent for the RingtoneService clss
         Intent serviceIntent = new Intent(context, RingtoneService.class);
         serviceIntent.putExtra("extra", getTheString);
         //Start the ringtone service

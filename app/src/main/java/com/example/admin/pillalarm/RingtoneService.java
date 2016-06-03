@@ -27,7 +27,7 @@ public class RingtoneService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
-    //@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+
     @Override
     public int onStartCommand(Intent intent, int flags, int StartId) {
         System.out.println("inside onstart command");

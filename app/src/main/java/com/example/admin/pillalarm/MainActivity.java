@@ -1,7 +1,9 @@
 package com.example.admin.pillalarm;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,11 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity{
     int i=0;
@@ -70,8 +70,10 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View v) {
                 set_pill();
                 for(i=0;i<10;i++){
-                    adapterOfTitles.add(pillArray[i]);
-                    System.out.println("COUNT IS:" +adapterOfTitles.getCount());
+                   // if(pillArray[i]!=" ") {
+                        adapterOfTitles.add(pillArray[i]);
+                        System.out.println("COUNT IS:" + adapterOfTitles.getCount());
+                    //}
                 }
                 Intent pillIntent= new Intent(MainActivity.this,InputPills.class);
                 startActivity(pillIntent);
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });
     }
+
     private void set_pill() {
         pillArray[0]=pillName1.getText().toString();
         pillArray[1]=pillName2.getText().toString();

@@ -38,14 +38,53 @@ public class InputPills extends AppCompatActivity implements AdapterView.OnItemC
         viewOfPills.setAdapter(theAdapter);
         viewOfPills.setOnItemClickListener(this);
 
-
-
     }
 
-
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Intent alarmIntent= new Intent(InputPills.this,Alarm.class);
-        startActivity(alarmIntent);
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        System.out.println("POSITION:"+position);
+        switch(position){
+            case 0:
+                Intent alarmIntent0= new Intent(InputPills.this,Alarm.class);
+                startActivity(alarmIntent0);
+                break;
+            case 1:
+                Intent alarmIntent1= new Intent(InputPills.this,Alarm.class);
+                startActivity(alarmIntent1);
+                break;
+            case 2:
+                Intent alarmIntent2= new Intent(InputPills.this,Alarm.class);
+                startActivity(alarmIntent2);
+                break;
+            case 3:
+                Intent alarmIntent3= new Intent(InputPills.this,Alarm.class);
+                startActivity(alarmIntent3);
+                break;
+            case 4:
+                Intent alarmIntent4= new Intent(InputPills.this,Alarm.class);
+                startActivity(alarmIntent4);
+                break;
+            case 5:
+                Intent alarmIntent5= new Intent(InputPills.this,Alarm.class);
+                startActivity(alarmIntent5);
+                break;
+            case 6:
+                Intent alarmIntent6= new Intent(InputPills.this,Alarm.class);
+                startActivity(alarmIntent6);
+                break;
+            case 7:
+                Intent alarmIntent7= new Intent(InputPills.this,Alarm.class);
+                startActivity(alarmIntent7);
+                break;
+            case 8:
+                Intent alarmIntent8= new Intent(InputPills.this,Alarm.class);
+                startActivity(alarmIntent8);
+                break;
+            case 9:
+                Intent alarmIntent9= new Intent(InputPills.this,Alarm.class);
+                startActivity(alarmIntent9);
+                break;
+        }
+
     }
 }

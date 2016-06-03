@@ -23,7 +23,6 @@ public class Alarm extends AppCompatActivity {
     TimePicker alarmTimePicker;
     TextView updateText;
     Context context;
-    //static Intent alarmIntent;
     PendingIntent waitingIntent;
 
     @Override
@@ -42,7 +41,6 @@ public class Alarm extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         this.context= this;
 
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
