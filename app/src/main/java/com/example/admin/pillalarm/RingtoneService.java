@@ -5,6 +5,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -20,6 +21,7 @@ public class RingtoneService extends Service {
 
     MediaPlayer song;
     boolean isPlaying;
+    NotificationManager notifyManager;
     int startId;
 
     @Nullable
@@ -57,7 +59,7 @@ public class RingtoneService extends Service {
             this.isPlaying=true;
             this.startId= 0;
             //Make a notification when the alarm is ringing
-            NotificationManager notifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            notifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             Intent intentInAlarm = new Intent (this.getApplicationContext(), Alarm.class);
             PendingIntent pendingIntentInAlarm = PendingIntent.getActivity(this, 0,intentInAlarm,0 );
 
@@ -73,9 +75,11 @@ public class RingtoneService extends Service {
             notifyManager.notify(0, popupNotification);
         }
 
+
         else if(this.isPlaying && startId == 0) {
             song.stop();
             song.reset();
+            notifyManager.cancelAll();
             this.isPlaying=false;
             this.startId= 0;
         }

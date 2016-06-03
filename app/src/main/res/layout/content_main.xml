@@ -22,11 +22,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GO!"
+        android:text="next"
         android:id="@+id/button"
-        android:layout_alignTop="@+id/intro"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/retrieve"
+        android:layout_alignEnd="@+id/retrieve" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -113,7 +113,7 @@
         android:layout_height="wrap_content"
         android:text="retrieve info"
         android:id="@+id/retrieve"
-        android:layout_alignTop="@+id/editText3"
+        android:layout_below="@+id/editText10"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 

@@ -19,19 +19,7 @@ public class PillsList extends AppCompatActivity implements AdapterView.OnItemCl
         setContentView(R.layout.activity_input_pills);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-       // MainActivity.displayData();
-
 
 
         ListView viewOfPills = (ListView) findViewById(R.id.listView);
@@ -39,7 +27,6 @@ public class PillsList extends AppCompatActivity implements AdapterView.OnItemCl
         System.out.println("COUNT INSIDE INPUT PILLS:" +theAdapter.getCount());
         viewOfPills.setAdapter(theAdapter);
         viewOfPills.setOnItemClickListener(this);
-
     }
 
     @Override

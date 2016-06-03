@@ -32,14 +32,6 @@ public class Alarm extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.context= this;
 
@@ -49,13 +41,11 @@ public class Alarm extends AppCompatActivity {
 
         //Create an instance of the Calendar
         final Calendar calendar = Calendar.getInstance();
-
         //Make an intent for the AlarmReceiver class
         final Intent alarmIntent = new Intent(this.context,AlarmReceiver.class);;
 
         //Initialize the on button
         Button alarmOn=(Button) findViewById(R.id.alarmOn);
-
         //Create an onclick listener to start the alarm
         alarmOn.setOnClickListener( new View.OnClickListener(){
             @Override
@@ -78,12 +68,12 @@ public class Alarm extends AppCompatActivity {
                 if(min < 10){
                     minString = "0" + String.valueOf(min);
                 }
-                set_alarm_text("Time is set to "+ hourString + ":" + minString);
+                set_alarm_text("Alarm set to "+ hourString + ":" + minString);
 
-                // Indicates when on button is clicked fro the clock
+                // Indicates when on button is clicked for the clock
                 alarmIntent.putExtra("extra","ON");
 
-                //Set_alarm_text("Alarm ON!");
+                //
                 waitingIntent = PendingIntent.getBroadcast(Alarm.this,
                         0,alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                 //Set the alarm Manager
