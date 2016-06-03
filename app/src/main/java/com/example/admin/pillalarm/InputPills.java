@@ -28,7 +28,9 @@ public class InputPills extends AppCompatActivity implements AdapterView.OnItemC
                         .setAction("Action", null).show();
             }
         });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // MainActivity.displayData();
 
 
 
