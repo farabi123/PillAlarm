@@ -113,7 +113,7 @@
         android:layout_height="wrap_content"
         android:text="retrieve info"
         android:id="@+id/retrieve"
-        android:layout_below="@+id/editText10"
+        android:layout_alignTop="@+id/editText10"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 

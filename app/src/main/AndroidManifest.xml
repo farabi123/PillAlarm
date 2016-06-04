@@ -33,7 +33,7 @@
         <receiver android:name=".AlarmReceiver" />
 
         <service
-            android:name=".RingtoneService"
+            android:name=".AlarmService"
             android:enabled="true" />
 
         <activity

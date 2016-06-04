@@ -1,14 +1,10 @@
 package com.example.admin.pillalarm;
 
-import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -24,7 +20,6 @@ public class Alarm extends AppCompatActivity {
     TextView updateText;
     Context context;
     PendingIntent waitingIntent;
-    static int savedValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,24 +28,27 @@ public class Alarm extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Controls back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.context= this;
 
+        //Initialize object values
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmTimePicker = (TimePicker) findViewById(R.id.timePicker);
         updateText = (TextView) findViewById(R.id.updateAlarmStatus);
 
         //Create an instance of the Calendar
         final Calendar calendar = Calendar.getInstance();
-        //Make an intent for the AlarmReceiver class
+        //Create an intent for the AlarmReceiver class
         final Intent alarmIntent = new Intent(this.context,AlarmReceiver.class);;
+
         //Initialize the on button
         Button alarmOn=(Button) findViewById(R.id.alarmOn);
         //Create an onclick listener to start the alarm
         alarmOn.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
+                //Set hour and minute in calendar
                 calendar.set(Calendar.HOUR_OF_DAY,alarmTimePicker.getHour());
                 calendar.set(Calendar.MINUTE,alarmTimePicker.getMinute());
 
@@ -62,33 +60,25 @@ public class Alarm extends AppCompatActivity {
                 String hourString = String.valueOf(hour);
                 String minString =  String.valueOf(min);
 
-                if(hour > 12) {
-                    hourString = String.valueOf(hour - 12);
-                }
-                if(min < 10){
-                    minString = "0" + String.valueOf(min);
-                }
-                set_alarm_text("Alarm set to "+ hourString + ":" + minString);
+                //Fix formatting of displayed set time
+                if(hour > 12) {hourString = String.valueOf(hour - 12);}
+                if(min < 10){minString = "0" + String.valueOf(min);}
+                setAlarmText("Alarm set to "+ hourString + ":" + minString);
 
                 // Indicates when on button is clicked for the clock
-                alarmIntent.putExtra("extra","ON");
+                alarmIntent.putExtra("is","ON");
 
-                //
-               // int idNumber = (int) System.currentTimeMillis();
+                //Give the pending Intent a new ID based on which pill is chosen
                 int idNumber=PillsList.getID();
                 System.out.println("ID NUMBER ON :"+PillsList.getID());
-
                 waitingIntent = PendingIntent.getBroadcast(Alarm.this, idNumber,alarmIntent, PendingIntent.FLAG_ONE_SHOT);
-                  //savedValue=idNumber;
-                        //FLAG_UPDATE_CURRENT);
+
                 //Set the alarm Manager
                 alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),waitingIntent);
 
             }
         });
-       // Intent intent = new Intent(load.this, AlarmReceiver.class);
 
-        //PendingIntent appIntent = PendingIntent.getBroadcast(this, idNumber, intent,PendingIntent.FLAG_ONE_SHOT);
 
         //Initialize the off button
         Button alarmOff=(Button) findViewById(R.id.alarmOff);
@@ -96,20 +86,17 @@ public class Alarm extends AppCompatActivity {
         alarmOff.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                set_alarm_text("Alarm OFF!");
+                setAlarmText("Alarm OFF!");
                 //cancel the waiting intent
-                //savedValue=PillsList.getID();
-                //System.out.println("SAVED VALUE OFF :"+savedValue);
-                //PendingIntent cancelIntent = PendingIntent.getBroadcast(Alarm.this, savedValue,alarmIntent, PendingIntent.FLAG_ONE_SHOT);
                 alarmManager.cancel(waitingIntent);
-                // Indicates when off button is clicked fro the clock
-                alarmIntent.putExtra("extra","OFF");
+                // Indicates when off button is clicked for the clock
+                alarmIntent.putExtra("is","OFF");
                 sendBroadcast(alarmIntent);
             }
         });
     }
 
-    private void set_alarm_text(String output) {
+    private void setAlarmText(String output) {
         updateText.setText(output);
     }
  }

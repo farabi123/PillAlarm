@@ -1,23 +1,20 @@
 package com.example.admin.pillalarm;
 
-import android.annotation.TargetApi;
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
-import android.widget.Toast;
 
 /**
  * Created by admin on 5/31/2016.
  */
-public class RingtoneService extends Service {
+public class AlarmService extends Service {
 
     MediaPlayer song;
     boolean isPlaying;
@@ -34,7 +31,7 @@ public class RingtoneService extends Service {
     public int onStartCommand(Intent intent, int flags, int StartId) {
         System.out.println("inside onstart command");
 
-        String status = intent.getExtras().getString("extra");
+        String status = intent.getExtras().getString("is");
         System.out.println("Status = "+ status);
         if (status != null) {
             switch (status) {
@@ -65,7 +62,7 @@ public class RingtoneService extends Service {
 
             Notification popupNotification = new NotificationCompat.Builder(this)
                     .setContentTitle ("TAKE YOUR PILLS!!!")
-                    .setContentText("CLICK HERE TO SHUT ME UP")
+                    .setContentText("CLICK HERE TO TURN OFF")
                     .setContentIntent(pendingIntentInAlarm)
                     .setSmallIcon(R.drawable.bell)
                     .setAutoCancel(true)
@@ -74,8 +71,6 @@ public class RingtoneService extends Service {
             // Start notification
             notifyManager.notify(0, popupNotification);
         }
-
-
         else if(this.isPlaying && startId == 0) {
             song.stop();
             song.reset();
@@ -88,12 +83,10 @@ public class RingtoneService extends Service {
             System.out.println("id="+ this.startId);
             System.out.println("music playing="+ this.isPlaying);
         }
-
         return START_NOT_STICKY;
     }
     @Override
     public void onDestroy(){
-        System.out.println("Destroy the activity");
         super.onDestroy();
         this.isPlaying =false;
     }

@@ -12,13 +12,13 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent){
         System.out.println("It's receiving in the receiver");
 
-        String getTheString = intent.getExtras().getString("extra");
+        String getTheString = intent.getExtras().getString("is");
         System.out.println("The string is "+ getTheString);
 
-        //Make an intent for the RingtoneService clss
-        Intent serviceIntent = new Intent(context, RingtoneService.class);
-        serviceIntent.putExtra("extra", getTheString);
-        //Start the ringtone service
+        //Make an intent for the AlarmService clss
+        Intent serviceIntent = new Intent(context, AlarmService.class);
+        serviceIntent.putExtra("is", getTheString);
+        //Start the alarm service
         context.startService(serviceIntent);
     }
 

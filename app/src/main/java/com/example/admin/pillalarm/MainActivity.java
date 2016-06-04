@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 set_pill();
-                //displayData();
                 for(i=0;i<10;i++) {
                     if (pillArray[i].equals(empty)){
                         System.out.println("THROW IT AWAY");
