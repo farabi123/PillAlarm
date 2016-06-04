@@ -82,7 +82,7 @@ public class Alarm extends AppCompatActivity {
 
         //Initialize the off button
         Button alarmOff=(Button) findViewById(R.id.alarmOff);
-        //Create an onclick listeer to turn off the alarm
+        //Create an onclick listener to turn off the alarm
         alarmOff.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View v) {

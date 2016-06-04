@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity{
         GO.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                set_pill();
+                setPill();
                 for(i=0;i<10;i++) {
                     if (pillArray[i].equals(empty)){
                         System.out.println("THROW IT AWAY");
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
-    private void set_pill() {
+    private void setPill() {
         pillArray[0]=pillName1.getText().toString();
         pillArray[1]=pillName2.getText().toString();
         pillArray[2]=pillName3.getText().toString();
@@ -167,7 +167,6 @@ public class MainActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
-
     //Retrieve info on the screen in editTexts
     public void displayData(){
         String pill1 = sharedPref.getString("pill1","");
@@ -191,7 +190,5 @@ public class MainActivity extends AppCompatActivity{
         pillName8.setText(pill8);
         pillName9.setText(pill9);
         pillName10.setText(pill10);
-
     }
-
 }

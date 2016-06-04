@@ -55,6 +55,7 @@ public class AlarmService extends Service {
             song.start();
             this.isPlaying=true;
             this.startId= 0;
+
             //Make a notification when the alarm is ringing
             notifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             Intent intentInAlarm = new Intent (this.getApplicationContext(), Alarm.class);
@@ -68,7 +69,7 @@ public class AlarmService extends Service {
                     .setAutoCancel(true)
                     .build();
 
-            // Start notification
+            // Start the notification
             notifyManager.notify(0, popupNotification);
         }
         else if(this.isPlaying && startId == 0) {
@@ -79,7 +80,8 @@ public class AlarmService extends Service {
             this.startId= 0;
         }
         else{
-            System.out.println("Code shouldn't enter this. WHY ARE YOU HERE?");
+            System.out.println("Code shouldn't enter this. But the emulator is skipping frames");
+            System.out.println("Not giving enough time to turn off the alarm before the next starts");
             System.out.println("id="+ this.startId);
             System.out.println("music playing="+ this.isPlaying);
         }

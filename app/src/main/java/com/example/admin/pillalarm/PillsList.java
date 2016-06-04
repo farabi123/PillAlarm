@@ -66,18 +66,22 @@ public class PillsList extends AppCompatActivity implements AdapterView.OnItemCl
             case 6:
                 Intent alarmIntent6= new Intent(PillsList.this,Alarm.class);
                 startActivity(alarmIntent6);
+                theID=6;
                 break;
             case 7:
                 Intent alarmIntent7= new Intent(PillsList.this,Alarm.class);
-                startActivity(alarmIntent7);;
+                startActivity(alarmIntent7);
+                theID=7;
                 break;
             case 8:
                 Intent alarmIntent8= new Intent(PillsList.this,Alarm.class);
                 startActivity(alarmIntent8);
+                theID=8;
                 break;
             case 9:
                 Intent alarmIntent9= new Intent(PillsList.this,Alarm.class);
                 startActivity(alarmIntent9);
+                theID=9;
                 break;
         }
 

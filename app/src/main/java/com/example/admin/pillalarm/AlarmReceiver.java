@@ -10,7 +10,7 @@ import android.content.Intent;
 public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent){
-        System.out.println("It's receiving in the receiver");
+        System.out.println("In the receiver");
 
         String getTheString = intent.getExtras().getString("is");
         System.out.println("The string is "+ getTheString);
