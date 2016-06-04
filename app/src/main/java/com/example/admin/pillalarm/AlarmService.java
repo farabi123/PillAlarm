@@ -19,7 +19,7 @@ public class AlarmService extends Service {
     MediaPlayer song;
     boolean isPlaying;
     NotificationManager notifyManager;
-    int startId;
+    int flag;
 
     @Nullable
     @Override
@@ -34,27 +34,25 @@ public class AlarmService extends Service {
         String status = intent.getExtras().getString("is");
         System.out.println("Status = "+ status);
         if (status != null) {
-            switch (status) {
-                case "ON":
-                    System.out.println("ON CASE");
-                    startId = 1;
-                    break;
-                case "OFF":
-                    System.out.println("OFF CASE");
-                    startId = 0;
-                    break;
-                default:
-                    System.out.println("DEFAULT CASE");
-                    startId = 1000;
-                    break;
+            if (status.equals("ON")) {
+                System.out.println("ON CASE");
+                flag = 1;
+            }
+            else if (status.equals("OFF")) {
+                System.out.println("OFF CASE");
+                flag = 0;
+            }
+            else{
+                System.out.println("DEFAULT CASE");
+                flag = 1000;
             }
         }
 
-        if (!this.isPlaying && startId == 1){
+        if (!this.isPlaying && flag == 1){
             song = MediaPlayer.create(this, R.raw.ringtone);
             song.start();
             this.isPlaying=true;
-            this.startId= 0;
+            this.flag= 0;
 
             //Make a notification when the alarm is ringing
             notifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -72,17 +70,17 @@ public class AlarmService extends Service {
             // Start the notification
             notifyManager.notify(0, popupNotification);
         }
-        else if(this.isPlaying && startId == 0) {
+        else if(this.isPlaying && flag == 0) {
             song.stop();
             song.reset();
             notifyManager.cancelAll();
             this.isPlaying=false;
-            this.startId= 0;
+            this.flag= 0;
         }
         else{
             System.out.println("Code shouldn't enter this. But the emulator is skipping frames");
             System.out.println("Not giving enough time to turn off the alarm before the next starts");
-            System.out.println("id="+ this.startId);
+            System.out.println("flag="+ this.flag);
             System.out.println("music playing="+ this.isPlaying);
         }
         return START_NOT_STICKY;
