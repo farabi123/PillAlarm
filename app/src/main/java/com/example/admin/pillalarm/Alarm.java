@@ -24,6 +24,7 @@ public class Alarm extends AppCompatActivity {
     TextView updateText;
     Context context;
     PendingIntent waitingIntent;
+    static int savedValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,6 @@ public class Alarm extends AppCompatActivity {
         final Calendar calendar = Calendar.getInstance();
         //Make an intent for the AlarmReceiver class
         final Intent alarmIntent = new Intent(this.context,AlarmReceiver.class);;
-
         //Initialize the on button
         Button alarmOn=(Button) findViewById(R.id.alarmOn);
         //Create an onclick listener to start the alarm
@@ -74,13 +74,21 @@ public class Alarm extends AppCompatActivity {
                 alarmIntent.putExtra("extra","ON");
 
                 //
-                waitingIntent = PendingIntent.getBroadcast(Alarm.this,
-                        0,alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+               // int idNumber = (int) System.currentTimeMillis();
+                int idNumber=PillsList.getID();
+                System.out.println("ID NUMBER ON :"+PillsList.getID());
+
+                waitingIntent = PendingIntent.getBroadcast(Alarm.this, idNumber,alarmIntent, PendingIntent.FLAG_ONE_SHOT);
+                  //savedValue=idNumber;
+                        //FLAG_UPDATE_CURRENT);
                 //Set the alarm Manager
                 alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),waitingIntent);
 
             }
         });
+       // Intent intent = new Intent(load.this, AlarmReceiver.class);
+
+        //PendingIntent appIntent = PendingIntent.getBroadcast(this, idNumber, intent,PendingIntent.FLAG_ONE_SHOT);
 
         //Initialize the off button
         Button alarmOff=(Button) findViewById(R.id.alarmOff);
@@ -90,6 +98,9 @@ public class Alarm extends AppCompatActivity {
             public void onClick(View v) {
                 set_alarm_text("Alarm OFF!");
                 //cancel the waiting intent
+                //savedValue=PillsList.getID();
+                //System.out.println("SAVED VALUE OFF :"+savedValue);
+                //PendingIntent cancelIntent = PendingIntent.getBroadcast(Alarm.this, savedValue,alarmIntent, PendingIntent.FLAG_ONE_SHOT);
                 alarmManager.cancel(waitingIntent);
                 // Indicates when off button is clicked fro the clock
                 alarmIntent.putExtra("extra","OFF");

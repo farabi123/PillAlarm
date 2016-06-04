@@ -42,13 +42,13 @@ public class RingtoneService extends Service {
                     System.out.println("ON CASE");
                     startId = 1;
                     break;
-                case "Off":
+                case "OFF":
                     System.out.println("OFF CASE");
                     startId = 0;
                     break;
                 default:
                     System.out.println("DEFAULT CASE");
-                    startId = 0;
+                    startId = 1000;
                     break;
             }
         }
@@ -93,7 +93,8 @@ public class RingtoneService extends Service {
     }
     @Override
     public void onDestroy(){
-
-        //Toast.makeText(this,"inside onDestroy", Toast.LENGTH_SHORT).show();
+        System.out.println("Destroy the activity");
+        super.onDestroy();
+        this.isPlaying =false;
     }
 }

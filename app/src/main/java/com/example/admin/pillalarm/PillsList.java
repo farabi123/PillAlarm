@@ -28,7 +28,7 @@ public class PillsList extends AppCompatActivity implements AdapterView.OnItemCl
         viewOfPills.setAdapter(theAdapter);
         viewOfPills.setOnItemClickListener(this);
     }
-
+    static int theID;
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         System.out.println("POSITION:"+position);
@@ -36,26 +36,32 @@ public class PillsList extends AppCompatActivity implements AdapterView.OnItemCl
             case 0:
                 Intent alarmIntent0= new Intent(PillsList.this,Alarm.class);
                 startActivity(alarmIntent0);
+                theID=0;
                 break;
             case 1:
                 Intent alarmIntent1= new Intent(PillsList.this,Alarm.class);
                 startActivity(alarmIntent1);
+                theID=1;
                 break;
             case 2:
                 Intent alarmIntent2= new Intent(PillsList.this,Alarm.class);
                 startActivity(alarmIntent2);
+                theID=2;
                 break;
             case 3:
                 Intent alarmIntent3= new Intent(PillsList.this,Alarm.class);
                 startActivity(alarmIntent3);
+                theID=3;
                 break;
             case 4:
                 Intent alarmIntent4= new Intent(PillsList.this,Alarm.class);
                 startActivity(alarmIntent4);
+                theID=4;
                 break;
             case 5:
                 Intent alarmIntent5= new Intent(PillsList.this,Alarm.class);
                 startActivity(alarmIntent5);
+                theID=5;
                 break;
             case 6:
                 Intent alarmIntent6= new Intent(PillsList.this,Alarm.class);
@@ -63,7 +69,7 @@ public class PillsList extends AppCompatActivity implements AdapterView.OnItemCl
                 break;
             case 7:
                 Intent alarmIntent7= new Intent(PillsList.this,Alarm.class);
-                startActivity(alarmIntent7);
+                startActivity(alarmIntent7);;
                 break;
             case 8:
                 Intent alarmIntent8= new Intent(PillsList.this,Alarm.class);
@@ -75,5 +81,8 @@ public class PillsList extends AppCompatActivity implements AdapterView.OnItemCl
                 break;
         }
 
+    }
+    static public int getID(){
+        return theID;
     }
 }
