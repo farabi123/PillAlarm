@@ -31,7 +31,7 @@ public class AlarmService extends Service {
     public int onStartCommand(Intent intent, int flags, int StartId) {
         System.out.println("inside onstart command");
 
-        String status = intent.getExtras().getString("is");
+        String status = AlarmReceiver.stringValue();
         System.out.println("Status = "+ status);
         if (status != null) {
             if (status.equals("ON")) {

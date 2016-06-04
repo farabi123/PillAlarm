@@ -17,6 +17,7 @@ import java.util.Calendar;
 public class Alarm extends AppCompatActivity {
     AlarmManager alarmManager;
     TimePicker alarmTimePicker;
+    TextView topText;
     TextView updateText;
     Context context;
     PendingIntent waitingIntent;
@@ -35,7 +36,9 @@ public class Alarm extends AppCompatActivity {
         //Initialize object values
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmTimePicker = (TimePicker) findViewById(R.id.timePicker);
+        topText = (TextView) findViewById(R.id.textView);
         updateText = (TextView) findViewById(R.id.updateAlarmStatus);
+
 
         //Create an instance of the Calendar
         final Calendar calendar = Calendar.getInstance();
@@ -63,7 +66,9 @@ public class Alarm extends AppCompatActivity {
                 //Fix formatting of displayed set time
                 if(hour > 12) {hourString = String.valueOf(hour - 12);}
                 if(min < 10){minString = "0" + String.valueOf(min);}
-                setAlarmText("Alarm set to "+ hourString + ":" + minString);
+
+                setTopAlarmText( "Time set:");
+                setBottomAlarmText( hourString + ":" + minString);
 
                 // Indicates when on button is clicked for the clock
                 alarmIntent.putExtra("is","ON");
@@ -86,7 +91,8 @@ public class Alarm extends AppCompatActivity {
         alarmOff.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                setAlarmText("Alarm OFF!");
+                setTopAlarmText("Alarm OFF!");
+                setBottomAlarmText("");
                 //cancel the waiting intent
                 alarmManager.cancel(waitingIntent);
                 // Indicates when off button is clicked for the clock
@@ -96,7 +102,9 @@ public class Alarm extends AppCompatActivity {
         });
     }
 
-    private void setAlarmText(String output) {
+
+    private void setTopAlarmText(String output) {topText.setText(output);}
+    private void setBottomAlarmText(String output) {
         updateText.setText(output);
     }
  }
